@@ -35,7 +35,7 @@
 
 Name:           batik
 Version:        1.6
-Release:        3jpp
+Release:        %mkrel 3
 Epoch:          0
 Summary:        Scalable Vector Graphics for Java
 License:        Apache Software License
