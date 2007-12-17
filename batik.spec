@@ -69,7 +69,6 @@ BuildRequires:  java-devel >= 0:1.4
 %if ! %{gcj_support}
 BuildArch:      noarch
 %endif
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 %if %{gcj_support}
 BuildRequires:    gnu-crypto
 BuildRequires:    java-gcj-compat-devel
