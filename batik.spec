@@ -162,7 +162,7 @@ cp -p %{SOURCE5} $RPM_BUILD_ROOT%{_bindir}/slideshow
 # javadoc
 mkdir -p $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
 cp -pr %{name}-%{version}/docs/javadoc/* \
-  $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
+  $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version} || :
 rm -rf %{name}-%{version}/docs/javadoc
 ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{name}
 
