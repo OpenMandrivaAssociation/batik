@@ -18,18 +18,19 @@ Source6:        %{name}-squiggle.desktop
 Patch0:         %{name}-sun-codecs.patch
 Patch1:         %{name}-manifests.patch
 Patch2:         %{name}-policy.patch
-Requires:       rhino >= 1.5
-Requires:       xml-commons-apis >= 1.3.04
+Requires:       rhino >= 0:1.5
+Requires:       xml-commons-jaxp-1.3-apis >= 0:1.3.04
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires:  ant
-BuildRequires:  rhino >= 1.5
-BuildRequires:  java-rpmbuild >= 1.5
+BuildRequires:  rhino >= 0:1.5
+BuildRequires:  java-rpmbuild >= 0:1.5
 BuildRequires:  xerces-j2
 BuildRequires:  jython
 BuildRequires:  java-javadoc
 BuildRequires:  rhino-javadoc
+BuildRequires:  xml-commons-jaxp-1.3-apis >= 0:1.3.04
 %if %{gcj_support}
 BuildRequires:  java-gcj-compat-devel
 %else
@@ -45,7 +46,7 @@ purposes, such as viewing, generation or manipulation.
 Summary:        Batik SVG browser
 Group:          Development/Java
 Requires:       %{name} = %{epoch}:%{version}-%{release}
-Requires:       jpackage-utils >= 1.5, xerces-j2 >= 2.3
+Requires:       jpackage-utils >= 0:1.5, xerces-j2 >= 0:2.3
 
 %description    squiggle
 The Squiggle SVG Browser lets you view SVG file, zoom, pan and rotate
@@ -55,7 +56,7 @@ in the content and select text items in the image and much more.
 Summary:        Batik SVG pretty printer
 Group:          Development/Java
 Requires:       %{name} = %{epoch}:%{version}-%{release}
-Requires:       jpackage-utils >= 1.5, xerces-j2 >= 2.3
+Requires:       jpackage-utils >= 0:1.5, xerces-j2 >= 0:2.3
 
 %description    svgpp
 The SVG Pretty Printer lets developers "pretty-up" their SVG files and
@@ -66,7 +67,7 @@ also be used to modify the DOCTYPE declaration on SVG files.
 Summary:        Batik SVG font converter
 Group:          Development/Java
 Requires:       %{name} = %{epoch}:%{version}-%{release}
-Requires:       jpackage-utils >= 1.5
+Requires:       jpackage-utils >= 0:1.5
 
 %description    ttf2svg
 The SVG Font Converter lets developers convert character ranges from
@@ -78,7 +79,7 @@ rendered exactly the same on all systems.
 Summary:        Batik SVG rasterizer
 Group:          Development/Java
 Requires:       %{name} = %{epoch}:%{version}-%{release}
-Requires:       jpackage-utils >= 1.5, xerces-j2 >= 2.3
+Requires:       jpackage-utils >= 0:1.5, xerces-j2 >= 0:2.3
 
 %description    rasterizer
 The SVG Rasterizer is a utility that can convert SVG files to a raster
@@ -91,7 +92,7 @@ to be added easily.
 Summary:        Batik SVG slideshow
 Group:          Development/Java
 Requires:       %{name} = %{epoch}:%{version}-%{release}
-Requires:       jpackage-utils >= 1.5, xerces-j2 >= 2.3
+Requires:       jpackage-utils >= 0:1.5, xerces-j2 >= 0:2.3
 
 %description    slideshow
 Batik SVG slideshow.
