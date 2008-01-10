@@ -15,7 +15,6 @@ Source3:        %{name}.ttf2svg.script
 Source4:        %{name}.rasterizer.script
 Source5:        %{name}.slideshow.script
 Source6:        %{name}-squiggle.desktop
-Patch0:         %{name}-sun-codecs.patch
 Patch1:         %{name}-manifests.patch
 Patch2:         %{name}-policy.patch
 Requires:       rhino >= 0:1.5
@@ -114,8 +113,7 @@ Demonstrations and samples for %{name}.
 
 
 %prep
-%setup -q -n %{name}-%{version}
-%patch0 -p0
+%setup -q
 %patch1 -p1
 %patch2 -p1
 rm -f `find -name readOnly.png`
