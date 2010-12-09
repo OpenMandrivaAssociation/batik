@@ -3,7 +3,7 @@
 Summary:	Scalable Vector Graphics for Java
 Name:		batik
 Version:	1.7
-Release:	%mkrel 0.1.4
+Release:	%mkrel 0.1.5
 Epoch:		0
 Group:		Development/Java
 License:	Apache License
