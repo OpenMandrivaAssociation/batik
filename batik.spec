@@ -41,6 +41,8 @@ BuildRequires:  xml-commons-apis >= 1.3.04
 BuildRequires:  java-javadoc >= 0:1.6.0
 BuildRequires:  rhino-javadoc
 
+BuildRequires:  zip
+
 Requires:       java >= 0:1.6.0
 Requires:       rhino >= 1.5
 Requires:       xalan-j2
