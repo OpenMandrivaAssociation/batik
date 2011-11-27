@@ -1,6 +1,6 @@
 Name:           batik
 Version:        1.7
-Release:        12
+Release:        14
 Summary:        Scalable Vector Graphics for Java
 License:        ASL 2.0
 URL:            http://xml.apache.org/batik/
