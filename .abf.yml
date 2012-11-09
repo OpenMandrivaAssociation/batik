@@ -1,0 +1,10 @@
+sources:
+  "batik-orbit-manifests.tar.gz:"	f317614d2eeb6f85c01c9fc8f10c377bfad93876
+  "batik.rasterizer.script:"	60e139a034a7c2c2d2c744eec9ce185fb94c8b3f
+  "batik-repack-1.7.zip:"	917788138ccabe839f45ff82ff7eff1e379b9feb
+  "batik-repack.sh:"	a58e28991d996de506f5314422507ca9b8c32801
+  "batik.slideshow.script:"	9ac1ff7db8ca0a7b2d6591db5fc8e826b767a45d
+  "batik-squiggle.desktop:"	855e82532a97bf963d8ef040e90613ec3b1f1eb4
+  "batik.squiggle.script:"	8256aa9eebc29224e6425b81a2635399eeaa8ea2
+  "batik.svgpp.script:"	1f2956aedff4211a03460e458290cd08aa8aa9b1
+  "batik.ttf2svg.script:"	bb07f7f146437de5e7ced9d6539d2df23d09d8bd
