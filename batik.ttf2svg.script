@@ -23,7 +23,7 @@ fi
 
 # Configuration
 MAIN_CLASS=org.apache.batik.apps.ttf2svg.Main
-BASE_JARS="batik-ttf2svg.jar"
+BASE_JARS="batik batik-ttf2svg"
 
 # Set parameters
 set_jvm

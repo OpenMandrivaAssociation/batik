@@ -23,7 +23,7 @@ fi
 
 # Configuration
 MAIN_CLASS=org.apache.batik.apps.rasterizer.Main
-BASE_JARS="batik-rasterizer.jar"
+BASE_JARS="batik-rasterizer.jar batik-all.jar xml-commons-apis-ext.jar"
 
 # Set parameters
 set_jvm
