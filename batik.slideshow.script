@@ -23,7 +23,7 @@ fi
 
 # Configuration
 MAIN_CLASS=org.apache.batik.apps.slideshow.Main
-BASE_JARS="batik-slideshow.jar"
+BASE_JARS="batik batik-slideshow"
 
 # Set parameters
 set_jvm

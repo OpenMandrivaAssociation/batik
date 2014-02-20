@@ -23,7 +23,7 @@ fi
 
 # Configuration
 MAIN_CLASS=org.apache.batik.apps.svgpp.Main
-BASE_JARS="batik-svgpp.jar"
+BASE_JARS="batik batik-svgpp"
 
 # Set parameters
 set_jvm
