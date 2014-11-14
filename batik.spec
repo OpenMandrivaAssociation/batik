@@ -1,7 +1,7 @@
 %{?_javapackages_macros:%_javapackages_macros}
 Name:           batik
 Version:        1.8
-Release:        0.10.svn1230816.1%{?dist}
+Release:        0.12.svn1230816%{?dist}
 Summary:        Scalable Vector Graphics for Java
 License:        ASL 2.0 and W3C
 URL:            http://xml.apache.org/batik/
@@ -25,25 +25,23 @@ Source7:        %{name}-repack.sh
 # Then manually remove all lines containing MD5sums/crypto hashes.
 # tar czf batik-1.6-orbit-manifests.tar.gz *.MF
 #
-# FIXME:  move to 1.7 manifests
-Source8:        %{name}-1.6-orbit-manifests.tar.gz
+Source8:        %{name}-1.7-orbit-manifests.tar.gz
 
 
 Patch0:         %{name}-manifests.patch
 Patch1:         %{name}-policy.patch
 # remove dependency on bundled rhino from pom
-Patch2:		%{name}-script-remove-js.patch
-# SMIL in Fedora has been merged into xml-commons-apis-ext like it has
-# been upstream.  It's easier to take the OSGi manifests from Orbit
-# directly and patch this one.
-#
-# FIXME:  move to 1.7 manifest from Eclipse Orbit project
-Patch3:         %{name}-1.6-nosmilInDOMSVGManifest.patch
+Patch2:         %{name}-script-remove-js.patch
+
+# make sure we fail build if javadocs fail (run OOM)
+# also make maxmem a bit higher. we seem to need more...
+# https://issues.apache.org/jira/browse/BATIK-1065
+Patch3:         %{name}-javadoc-task-failonerror-and-oom.patch
 
 BuildArch:      noarch
 
 BuildRequires:  java-devel >= 1:1.6.0
-BuildRequires:  jpackage-utils >= 1.5
+BuildRequires:  javapackages-tools >= 1.5
 BuildRequires:  ant
 BuildRequires:  subversion
 BuildRequires:  zip
@@ -55,12 +53,11 @@ BuildRequires:  xalan-j2
 BuildRequires:  xml-commons-apis >= 1.3.04
 
 BuildRequires:  java-javadoc >= 1:1.6.0
-BuildRequires:  rhino-javadoc
 
 Requires:       java >= 1:1.6.0
-Requires:       jpackage-utils
+Requires:       javapackages-tools
 #full support for tiff
-Requires:	jai-imageio-core
+Requires:       jai-imageio-core
 Requires:       rhino >= 1.5
 Requires:       xalan-j2
 Requires:       xml-commons-apis >= 1.3.04
@@ -73,7 +70,7 @@ purposes, such as viewing, generation or manipulation.
 
 %package        squiggle
 Summary:        Batik SVG browser
-
+Group:          Applications/Multimedia
 Requires:       %{name} = %{version}-%{release}
 Requires:       xerces-j2 >= 2.3
 
@@ -83,7 +80,7 @@ in the content and select text items in the image and much more.
 
 %package        svgpp
 Summary:        Batik SVG pretty printer
-
+Group:          Applications/Multimedia
 Requires:       %{name} = %{version}-%{release}
 Requires:       xerces-j2 >= 2.3
 
@@ -94,7 +91,7 @@ also be used to modify the DOCTYPE declaration on SVG files.
 
 %package        ttf2svg
 Summary:        Batik SVG font converter
-
+Group:          Applications/Multimedia
 Requires:       %{name} = %{version}-%{release}
 
 %description    ttf2svg
@@ -105,7 +102,7 @@ rendered exactly the same on all systems.
 
 %package        rasterizer
 Summary:        Batik SVG rasterizer
-
+Group:          Applications/Multimedia
 Requires:       %{name} = %{version}-%{release}
 Requires:       xerces-j2 >= 2.3
 
@@ -118,7 +115,7 @@ to be added easily.
 
 %package        slideshow
 Summary:        Batik SVG slideshow
-
+Group:          Applications/Multimedia
 Requires:       %{name} = %{version}-%{release}
 Requires:       xerces-j2 >= 2.3
 
@@ -152,7 +149,6 @@ rm -f `find -name properties`
 mkdir orbit
 pushd orbit
 tar xzf %{SOURCE8}
-%patch3
 popd
 
 # create poms from templates
@@ -160,9 +156,11 @@ for module in anim awt-util bridge codec css dom ext extension gui-util \
               gvt parser script svg-dom svggen swing transcoder util xml \
               rasterizer slideshow squiggle svgpp ttf2svg; do
       sed "s:@version@:%{version}:g" sources/%{name}-$module.pom.template \
-      	  > %{name}-$module.pom
+         > %{name}-$module.pom
 done
 %patch2
+
+%patch3
 
 %build
 export CLASSPATH=$(build-classpath xml-commons-apis xml-commons-apis-ext js rhino xalan-j2 xalan-j2-serializer xerces-j2)
@@ -176,9 +174,6 @@ ant all-jar jars\
         rasterizer-jar \
         ttf2svg-jar
 
-for j in $(find batik-%{version} -name *.jar); do
- export CLASSPATH=$CLASSPATH:${j}
-done
 ant javadoc
 
 
@@ -261,9 +256,6 @@ for module in anim awt-util bridge codec css dom ext extension gui-util \
       %add_maven_depmap JPP.%{name}-%{name}-$module.pom %{name}/%{name}-$module.jar -a "%{name}:%{name}-$module"
 done
 
-
-
-
 # scripts
 mkdir -p $RPM_BUILD_ROOT%{_bindir}
 cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/squiggle
@@ -317,6 +309,14 @@ chmod +x $RPM_BUILD_ROOT%{_datadir}/%{name}/contrib/charts/convert.sh
 
 
 %changelog
+* Sun Feb 23 2014 Alexander Kurtakov <akurtako@redhat.com> 1.8-0.12.svn1230816
+- Move to Batik 1.7 manifests.
+- Remove old stuff.
+
+* Thu Jan 16 2014 Stanislav Ochotnicky <sochotnicky@redhat.com> - 1.8-0.11.svn1230816
+- Fix classpath for slideshow script
+- Change javadoc task maxmem to 512MB to avoid OOM
+
 * Thu Aug 08 2013 Stanislav Ochotnicky <sochotnicky@redhat.com> - 1.8-0.10.svn1230816
 - Update to latest packaging guidelines
 
@@ -517,7 +517,7 @@ chmod +x $RPM_BUILD_ROOT%{_datadir}/%{name}/contrib/charts/convert.sh
 * Sat Nov 17 2001 Christian Zoffoli <czoffoli@littlepenguin.org> 1.1-0.rc3.2jpp
 - added batik-libs creation
 
-* Thu Nov 9 2001 Christian Zoffoli <czoffoli@littlepenguin.org> 1.1-0.rc3.1jpp
+* Fri Nov 9 2001 Christian Zoffoli <czoffoli@littlepenguin.org> 1.1-0.rc3.1jpp
 - changed version to 0.rc3.1
 
 * Mon Nov 5 2001 Christian Zoffoli <czoffoli@littlepenguin.org> 1.1rc3-1jpp
