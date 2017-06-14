@@ -1,0 +1,39 @@
+From 6914031a6c71d88f2577deb3377300f3280bcce3 Mon Sep 17 00:00:00 2001
+From: Michael Simacek <msimacek@redhat.com>
+Date: Fri, 27 Nov 2015 15:35:57 +0100
+Subject: [PATCH] Fix imageio codec lookup
+
+---
+ .../src/main/java/org/apache/batik/transcoder/image/PNGTranscoder.java  | 2 +-
+ .../src/main/java/org/apache/batik/transcoder/image/TIFFTranscoder.java | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/batik-transcoder/src/main/java/org/apache/batik/transcoder/image/PNGTranscoder.java b/batik-transcoder/src/main/java/org/apache/batik/transcoder/image/PNGTranscoder.java
+index 6db21a9..4bb2d0d 100644
+--- a/batik-transcoder/src/main/java/org/apache/batik/transcoder/image/PNGTranscoder.java
++++ b/batik-transcoder/src/main/java/org/apache/batik/transcoder/image/PNGTranscoder.java
+@@ -111,7 +111,7 @@ public class PNGTranscoder extends ImageTranscoder {
+                 "org.apache.batik.ext.awt.image.codec.png.PNGTranscoderInternalCodecWriteAdapter");
+         if (adapter == null) {
+             adapter = getWriteAdapter(
+-                "org.apache.batik.transcoder.image.PNGTranscoderImageIOWriteAdapter");
++                "org.apache.batik.ext.awt.image.codec.imageio.PNGTranscoderImageIOWriteAdapter");
+         }
+         if (adapter == null) {
+             throw new TranscoderException(
+diff --git a/batik-transcoder/src/main/java/org/apache/batik/transcoder/image/TIFFTranscoder.java b/batik-transcoder/src/main/java/org/apache/batik/transcoder/image/TIFFTranscoder.java
+index 2cb5288..bb48dfa 100644
+--- a/batik-transcoder/src/main/java/org/apache/batik/transcoder/image/TIFFTranscoder.java
++++ b/batik-transcoder/src/main/java/org/apache/batik/transcoder/image/TIFFTranscoder.java
+@@ -104,7 +104,7 @@ public class TIFFTranscoder extends ImageTranscoder {
+                 "org.apache.batik.ext.awt.image.codec.tiff.TIFFTranscoderInternalCodecWriteAdapter");
+         if (adapter == null) {
+             adapter = getWriteAdapter(
+-                "org.apache.batik.transcoder.image.TIFFTranscoderImageIOWriteAdapter");
++                "org.apache.batik.ext.awt.image.codec.imageio.TIFFTranscoderImageIOWriteAdapter");
+         }
+         if (adapter == null) {
+             throw new TranscoderException(
+-- 
+2.9.3
+
