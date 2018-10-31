@@ -3,7 +3,7 @@
 
 Name:           batik
 Version:        1.9
-Release:        3.1
+Release:        3.2
 Summary:        Scalable Vector Graphics for Java
 License:        ASL 2.0 and W3C
 Group:          Development/Java
